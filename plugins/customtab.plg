@@ -3,7 +3,7 @@
 <!ENTITY name      "customtab">
 <!ENTITY author    "Squid">
 <!ENTITY version   "2017.05.06">
-<!ENTITY md5       "5bb886d911b4378fc07c60a54d93b8ea">
+<!ENTITY md5       "aea165b992ffabae65f3b52bea74b1fb">
 <!ENTITY launch    "Utilities/Customtab">
 <!ENTITY plugdir   "/usr/local/emhttp/plugins/&name;">
 <!ENTITY github    "Squidly271/customtab">

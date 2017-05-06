@@ -1,12 +1,24 @@
 #!/usr/bin/php
 <?PHP
+if ( ! is_file("/boot/config/plugins/customtab/customtab.cfg") ) {
+  return;
+}
+
 $cfg = parse_ini_file("/boot/config/plugins/customtab/customtab.cfg");
-print_r($cfg);
-$name = $cfg['name'];
+$name = ucfirst($cfg['name']);
 $fullname = $cfg['fullname'];
 $tabURL = $cfg['tabURL'];
 $width = $cfg['width'];
 $height = $cfg['height'];
+
+$name = str_replace("'","",$name);
+$name = str_replace('"',"",$name);
+$name = str_replace(" ","",$name);
+if (! preg_match('/^[a-z]/i', $name)) {
+  $name = "A$name";
+}
+$width = intval($width);
+$height = intval($height);
 
 $width = $width ? $width : "1280";
 $height = $height ? $height : "500";
