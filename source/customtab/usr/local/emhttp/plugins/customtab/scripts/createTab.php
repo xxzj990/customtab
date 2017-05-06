@@ -10,7 +10,9 @@ $fullname = $cfg['fullname'];
 $tabURL = $cfg['tabURL'];
 $width = $cfg['width'];
 $height = $cfg['height'];
-
+if ( ! $name ) {
+  $name = "Custom";
+}
 $name = str_replace("'","",$name);
 $name = str_replace('"',"",$name);
 $name = str_replace(" ","",$name);
