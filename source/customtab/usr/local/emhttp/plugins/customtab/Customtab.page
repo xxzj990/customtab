@@ -1,0 +1,45 @@
+Menu="Utilities"
+Title="Custom Tab"
+Icon="/images/customtab.png"
+---
+<?PHP
+$plugin = 'customtab';
+$cfg = parse_plugin_cfg($plugin);
+?>
+<script>
+var URL = "/plugins/customtab/include/exec.php";
+
+function applyTab() {
+  var name = $("#customtabname").val();
+  var fullname = $("#fullname").val();
+  var tabURL = $("#url").val();
+  var width = $("#width").val();
+  var height = $("#height").val();
+  
+  $.post(URL,{name:name,fullname:fullname,tabURL:tabURL,width:width,height:height},function(data) {
+    if ( data ) {
+      location.reload();
+    }
+  });
+}
+</script>
+<form markdown="1" method="POST" action="/update.php" target="progressFrame">
+<input type="hidden" name="#file" value="<?=$plugin?>/<?=$plugin?>.cfg">
+
+Tab Name:
+: <input type="text" id='customtabname' name="tabname" class="narrow" maxlength="20" value="<?=$cfg['name']?>" placeholder="Custom">
+
+Full Tab Name:
+: <input type="text" id="fullname" name="fullname" class="narrow" maxlength="50" value="<?=$cfg['fullname']?>">
+
+URL:
+: <input type='text' id='url' name='url' value='<?=$cfg['tabURL']?>'>
+
+Width:
+: <input type='text' id='width' class='narrow' name='width' value='<?=$cfg['width']?>' placeholder='1280'>
+
+Height:
+: <input type='text' id='height' class='narrow' name='height' value='<?=$cfg['height']?>' placeholder='500'>
+
+: <input type="button" value="Apply" onclick='applyTab();'><input type="button" value="Done" onclick="done()">
+</form>
