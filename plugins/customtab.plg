@@ -2,8 +2,8 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name      "customtab">
 <!ENTITY author    "Squid">
-<!ENTITY version   "2017.05.06">
-<!ENTITY md5       "481c87cb67364f3e9edc5774fb9415fb">
+<!ENTITY version   "2017.05.14">
+<!ENTITY md5       "2272b0232b5b4342a843c288521061fd">
 <!ENTITY launch    "Utilities/Customtab">
 <!ENTITY plugdir   "/usr/local/emhttp/plugins/&name;">
 <!ENTITY github    "Squidly271/customtab">
@@ -13,6 +13,9 @@
 <PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;">
 
 <CHANGES>
+###2017.05.14
+- Support Multiple Custom Tabs
+
 ###2017.05.06
 - Initial Release
 </CHANGES>
@@ -44,6 +47,8 @@ echo " Copyright 2015-2017, Squid"
 echo " Version: &version;"
 echo "----------------------------------------------------"
 echo ""
+echo "Converting old configuration file"
+/usr/local/emhttp/plugins/customtab/scripts/convert.php
 echo "Creating custom tab"
 /usr/local/emhttp/plugins/customtab/scripts/createTab.php
 </INLINE>

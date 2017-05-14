@@ -24,13 +24,12 @@ $Credits = "
 var URL = "/plugins/customtab/include/exec.php";
 
 function applyTab() {
-  var name = $("#customtabname").val();
-  var fullname = $("#fullname").val();
-  var tabURL = $("#url").val();
-  var width = $("#width").val();
-  var height = $("#height").val();
-  
-  $.post(URL,{name:name,fullname:fullname,tabURL:tabURL,width:width,height:height},function(data) {
+  var settings = new Array();
+  for ( var index = 0; index < 100; index++ ) {
+    var set = getTabSetting(index);
+    settings.push(set);
+  }
+  $.post(URL,{action:'apply',settings:JSON.stringify(settings)},function(data) {
     if ( data ) {
       location.reload();
     }
@@ -58,25 +57,85 @@ function myAlert(description,textdescription,textimage,imagesize, outsideClick, 
     html: true
   });
 }
+
+function getTabSetting(index) {
+  var tabname = $("#customtabname" + index).val();
+  var fullname = $("#fullname" + index).val();
+  var url = $("#url" + index).val();
+  var width = $("#width" + index).val();
+  var height = $("#height" + index).val();
+  var set = new Array(tabname,fullname,url,width,height);
+  return set;
+}
+
+function addTab() {
+  var settings = new Array();
+  for ( var index = 0; index < 100; index++ ) {
+    var set = getTabSetting(index);
+    settings.push(set);
+  }
+  showTabs("add_tab",settings);
+}  
+
+function deleteTab(del) {
+  var settings = new Array();
+  for ( var index = 0; index < 100; index++ ) {
+    if ( index == del ) {
+      continue;
+    }
+    var set = getTabSetting(index);
+    settings.push(set);
+  }
+  showTabs("show_tabs",settings);
+  $("#myapply").prop("disabled",false);
+}
+    
+
+function showTabs(action,settings) {
+  $.post(URL,{action:action,settings:JSON.stringify(settings)},function(data) {
+    if (data) {
+      $("#settings").html(data);
+      $(".setting").change(function() {
+        $("#myapply").prop("disabled",false);
+      });
+
+    }
+  });
+}
+
+function checkURL() {
+  var flag = false;
+  $(".url").each(function() {
+    var value = $(this).val();
+    if ( ! value ) {
+      $("#newtab").prop("disabled",true);
+      flag = true;
+    }
+  });
+  if ( flag ) {
+    $("#newtab").prop("disabled",false);
+  }
+}
+  
+$(function() {
+  $.post(URL,{action:'get_tabs_init'},function(data) {
+    if (data) {
+      $("#settings").html(data);
+      $(".setting").change(function() {
+        $("#myapply").prop("disabled",false);
+      });
+      $(".url").change(function() {
+        checkURL();
+      });
+    }
+  });
+});
+
 </script>
-<form markdown="1" method="POST" action="/update.php" target="progressFrame">
-<input type="hidden" name="#file" value="<?=$plugin?>/<?=$plugin?>.cfg">
+<span id='settings'></span>
 
-Tab Name:
-: <input type="text" id='customtabname' name="tabname" class="narrow" maxlength="20" value="<?=$cfg['name']?>" placeholder="Custom">
-
-Full Tab Name:
-: <input type="text" id="fullname" name="fullname" class="narrow" maxlength="50" value="<?=$cfg['fullname']?>">
-
-URL:
-: <input type='text' id='url' name='url' value='<?=$cfg['tabURL']?>'>
-
-Width:
-: <input type='text' id='width' class='narrow' name='width' value='<?=$cfg['width']?>' placeholder='1280'>
-
-Height:
-: <input type='text' id='height' class='narrow' name='height' value='<?=$cfg['height']?>' placeholder='500'>
-
-: <input type="button" value="Apply" onclick='applyTab();'><input type="button" value="Done" onclick="done()">
+<input id='myapply' type="button" value="Apply" onclick='applyTab();'><input type="button" value="Done" onclick="done()">
 </form>
 <a class='ca_credits' style='float:right;cursor:pointer' onclick='showCredits();'>Credits</a>
+<span id='debug'></span>
+<input type='button' value='Add Another Tab' id='newtab' onclick='addTab();'>
