@@ -98,7 +98,9 @@ function showTabs(action,settings) {
       $(".setting").change(function() {
         $("#myapply").prop("disabled",false);
       });
-
+      $(".url").change(function() {
+        checkURL();
+      });
     }
   });
 }
@@ -112,7 +114,7 @@ function checkURL() {
       flag = true;
     }
   });
-  if ( flag ) {
+  if ( ! flag ) {
     $("#newtab").prop("disabled",false);
   }
 }
