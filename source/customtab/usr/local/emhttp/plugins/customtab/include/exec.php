@@ -24,6 +24,8 @@ function create_tab_settings($index,$settings,$addFlag = false) {
   $o .= "<dl><input type='number' id='width$index' class='narrow setting' value='{$settings['width']}' placeholder='1280'></dl>";
   $o .= "<dt>Height:</dt>";
   $o .= "<dl><input type='number' id='height$index' class='narrow setting' value='{$settings['height']}' placeholder='500'></dl>";
+  $o .= "<dt>Azure / Gray Icon: (See <a href='http://fontawesome.io/cheatsheet/' target='_blank'>HERE</a>)</dt>";
+  $o .= "<dl><input type='text' id='fontawesome$index' class='narrow setting' value='{$settings['fontawesome']}' placeholder='f111'></dl>";
   $o .= "</dd>";
   $o .= "<hr>";
   
@@ -46,6 +48,7 @@ function tabArray($tab) {
   $set['tabURL'] = $tab[2];
   $set['width'] = $tab[3];
   $set['height'] = $tab[4];
+  $set['fontawesome'] = $tab[5];
   return $set;
 }
 function disableAddTab() {

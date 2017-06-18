@@ -64,7 +64,8 @@ function getTabSetting(index) {
   var url = $("#url" + index).val();
   var width = $("#width" + index).val();
   var height = $("#height" + index).val();
-  var set = new Array(tabname,fullname,url,width,height);
+  var fontawesome = $("#fontawesome" + index).val();
+  var set = new Array(tabname,fullname,url,width,height,fontawesome);
   return set;
 }
 

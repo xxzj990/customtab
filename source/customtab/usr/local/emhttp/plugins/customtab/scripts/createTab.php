@@ -14,6 +14,7 @@ foreach ($config as $cfg) {
   $tabURL = $cfg['tabURL'];
   $width = $cfg['width'];
   $height = $cfg['height'];
+  $fontawesome = $cfg['fontawesome'];
   if ( ! $name ) {
     $name = "Custom$index";
   }
@@ -28,7 +29,9 @@ foreach ($config as $cfg) {
 
   $width = $width ? $width : "1280";
   $height = $height ? $height : "500";
-  $mainPage = "Menu='Tasks:9$location'\nName='$name'\nType='xmenu'\nTabs='true'\n";
+  $fontawesome = $fontawesome ? $fontawesome : "f111";
+  
+  $mainPage = "Menu='Tasks:9$location'\nName='$name'\nType='xmenu'\nTabs='true'\nCode='$fontawesome'\n";
   $page = "Menu='$name'\nTitle='$fullname'\n---\n<iframe src='$tabURL' height='$height' width='$width'></iframe>\n";
   exec("mkdir -p /usr/local/emhttp/plugins/customtabtemp");
   file_put_contents("/usr/local/emhttp/plugins/customtabtemp/$name.page",$mainPage);
