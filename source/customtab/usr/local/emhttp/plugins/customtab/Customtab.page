@@ -65,7 +65,9 @@ function getTabSetting(index) {
   var width = $("#width" + index).val();
   var height = $("#height" + index).val();
   var fontawesome = $("#fontawesome" + index).val();
-  var set = new Array(tabname,fullname,url,width,height,fontawesome);
+  var selectPage = $("#selectPage"+index).val();
+  var page = $("#page"+index).val();
+  var set = new Array(tabname,fullname,url,width,height,fontawesome,selectPage,page);
   return set;
 }
 
@@ -117,6 +119,17 @@ function checkURL() {
   });
   if ( ! flag ) {
     $("#newtab").prop("disabled",false);
+  }
+}
+
+function enablePage(index) {
+  var pageEnable = $("#selectPage"+index).val();
+  if ( pageEnable == "page" ) {
+    $(".url"+index).prop("disabled",true);
+    $(".page"+index).prop("disabled",false);
+  } else {
+    $(".url"+index).prop("disabled",false);
+    $(".page"+index).prop("disabled",true);
   }
 }
   

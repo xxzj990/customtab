@@ -12,18 +12,38 @@ function create_tab_settings($index,$settings,$addFlag = false) {
   if ( ! $settings['tabURL'] && ! $addFlag ) {
     return;
   }
+  $pageFiles = json_decode(file_get_contents("/tmp/customtab/pagefiles.json"),true);
   $o = "<strong><font size='2'>Custom Tab Settings #$index</font></strong>&nbsp;&nbsp;<img style='cursor:pointer;' src='/plugins/customtab/images/delete.png' width='30px' onclick='deleteTab($index);'><br>";
   $o .= "<dd>";
+  $o .= "<dt>Custom URL or Built-In Page:</dt>";
+  $o .= "<dl><select id='selectPage$index' class='narrow setting' onchange='enablePage(&quot;$index&quot;)';>";
+  if ( $settings['selectPage'] == "page" ) {
+    $selectPage = 'selected'; $URLoptions = "disabled";
+  } else {
+    $selectURL = 'selected'; $pageoptions = "disabled";
+  }
+  $o .= "<option value='url' $selectURL>URL</option>";
+  $o .= "<option value='page' $selectPage>Built-In Page</option>";
+  $o .= "<select>";
+  $o .= "</dl>";
   $o .= "<dt>Tab Name:</dt>";
   $o .= "<dl><input type='text' id='customtabname$index' class='narrow setting' maxlength='20' value='{$settings['name']}' placeholder='Custom$index'></dl>";
   $o .= "<dt>Full Tab Name:</dt>";
   $o .= "<dl><input type='text' id='fullname$index' class='narrow setting' maxlength='80' value='{$settings['fullname']}'></dl>";
   $o .= "<dt>URL:</dt>";
-  $o .= "<dl><input type='text' id='url$index' class='setting url' value='{$settings['tabURL']}'></dl>";
+  $o .= "<dl><input type='text' id='url$index' class='setting url$index' $URLoptions value='{$settings['tabURL']}'></dl>";
+  $o .= "<dt>Built-In Page File:</dt>";
+  $o .= "<dl>";
+  $o .= "<select id='page$index' class='setting page$index' $pageoptions>";
+  $o .= "<option value=''>Select a page file</option>";
+  foreach ($pageFiles as $page) {
+    $o .= "<option value='{$page['CustomTabSource']}'>{$page['Menu']} {$page['Title']} {$page['CustomTabSource']}</option>";
+  }
+  $o .= "</select></dl>";  
   $o .= "<dt>Width:</dt>";
-  $o .= "<dl><input type='number' id='width$index' class='narrow setting' value='{$settings['width']}' placeholder='1280'></dl>";
+  $o .= "<dl><input type='number' id='width$index' class='narrow setting url$index' $URLoptions value='{$settings['width']}' placeholder='1280'></dl>";
   $o .= "<dt>Height:</dt>";
-  $o .= "<dl><input type='number' id='height$index' class='narrow setting' value='{$settings['height']}' placeholder='500'></dl>";
+  $o .= "<dl><input type='number' id='height$index' class='narrow setting url$index' $URLoptions value='{$settings['height']}' placeholder='500'></dl>";
   $o .= "<dt>Azure / Gray Icon: (See <a href='http://fontawesome.io/cheatsheet/' target='_blank'>HERE</a>)</dt>";
   $o .= "<dl><input type='text' id='fontawesome$index' class='narrow setting' value='{$settings['fontawesome']}' placeholder='f111'></dl>";
   $o .= "</dd>";
@@ -32,7 +52,7 @@ function create_tab_settings($index,$settings,$addFlag = false) {
   return $o;
 }
 
-function make_tabs($settings,$flag = false) {
+function make_tabs($settings,$flag = false,$pageFiles) {
   $index = 0;
   foreach ($settings as $tab) {
     $set = $flag ? $tab : tabArray($tab);
@@ -49,6 +69,9 @@ function tabArray($tab) {
   $set['width'] = $tab[3];
   $set['height'] = $tab[4];
   $set['fontawesome'] = $tab[5];
+  $set['selectPage'] = $tab[6];
+  $set['page'] = $tab[7];
+  
   return $set;
 }
 function disableAddTab() {
@@ -60,7 +83,24 @@ function enableAddTab() {
 
 switch ($_POST['action']) {
   case 'get_tabs_init':
-    $o = make_tabs(read_json_file("/boot/config/plugins/customtab/customtab.json"),true);
+    exec("find /usr/local/emhttp/plugins -name '*.page'",$pageFiles);
+    foreach ($pageFiles as $page) {
+      $file = explode("\n",trim(file_get_contents($page)));
+      unset($pageINI);
+      foreach ($file as $line) {
+        if ( (trim($line) == "---") || (trim($line) == "----") ) {
+          break;
+        }
+        $pageINI .= "$line\n";
+      }
+      $pageVars = parse_ini_string($pageINI);
+      
+      $pageVars['CustomTabSource'] = $page;
+      $allVars[] = $pageVars;
+    }
+    exec("mkdir -p /tmp/customtab");
+    file_put_contents("/tmp/customtab/pagefiles.json",json_encode($allVars,JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+    $o = make_tabs(read_json_file("/boot/config/plugins/customtab/customtab.json"),true,$allVars);
     echo $o;
     break;
   case 'add_tab':
@@ -89,7 +129,7 @@ switch ($_POST['action']) {
     $settings = json_decode($_POST['settings']);
     foreach ($settings as $set) {
       $tmp = tabArray($set);
-      if ( ! $tmp['tabURL'] ) {
+      if ( ! $tmp['tabURL'] && ! $tmp['page']) {
         continue;
       }
       $newSettings[] = $tmp;
