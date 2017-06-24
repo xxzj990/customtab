@@ -1,0 +1,4 @@
+#!/bin/bash
+logger Creating custom tabs
+/usr/local/emhttp/plugins/customtab/scripts/createTab.php
+

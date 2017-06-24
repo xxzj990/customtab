@@ -9,7 +9,7 @@ function read_json_file($file) {
 }
 
 function create_tab_settings($index,$settings,$addFlag = false) {
-  if ( ! $settings['tabURL'] && ! $addFlag ) {
+  if ( ! $settings['tabURL'] && ! $settings['page'] && ! $addFlag ) {
     return;
   }
   $pageFiles = json_decode(file_get_contents("/tmp/customtab/pagefiles.json"),true);
@@ -37,7 +37,7 @@ function create_tab_settings($index,$settings,$addFlag = false) {
   $o .= "<select id='page$index' class='setting page$index' $pageoptions>";
   $o .= "<option value=''>Select a page file</option>";
   foreach ($pageFiles as $page) {
-    $o .= "<option value='{$page['CustomTabSource']}'>{$page['Menu']} {$page['Title']} {$page['CustomTabSource']}</option>";
+    $o .= "<option value='{$page['CustomTabSource']}'>{$page['Title']} {$page['CustomTabSource']}</option>";
   }
   $o .= "</select></dl>";  
   $o .= "<dt>Width:</dt>";
@@ -48,11 +48,14 @@ function create_tab_settings($index,$settings,$addFlag = false) {
   $o .= "<dl><input type='text' id='fontawesome$index' class='narrow setting' value='{$settings['fontawesome']}' placeholder='f111'></dl>";
   $o .= "</dd>";
   $o .= "<hr>";
+  $o .= "<script>$('#page$index').val('{$settings['page']}');</script>";
+
   
   return $o;
 }
 
-function make_tabs($settings,$flag = false,$pageFiles) {
+function make_tabs($settings,$flag = false) {
+  $pageFiles = json_decode(file_get_contents("/tmp/customtab/pagefiles.json"),true);
   $index = 0;
   foreach ($settings as $tab) {
     $set = $flag ? $tab : tabArray($tab);
@@ -94,13 +97,15 @@ switch ($_POST['action']) {
         $pageINI .= "$line\n";
       }
       $pageVars = parse_ini_string($pageINI);
-      
+      if ( $pageVars['Type'] == "menu" ) {
+        continue;
+      }
       $pageVars['CustomTabSource'] = $page;
       $allVars[] = $pageVars;
     }
     exec("mkdir -p /tmp/customtab");
     file_put_contents("/tmp/customtab/pagefiles.json",json_encode($allVars,JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-    $o = make_tabs(read_json_file("/boot/config/plugins/customtab/customtab.json"),true,$allVars);
+    $o = make_tabs(read_json_file("/boot/config/plugins/customtab/customtab.json"),true);
     echo $o;
     break;
   case 'add_tab':
@@ -108,7 +113,7 @@ switch ($_POST['action']) {
     $index = 0;
     foreach ($settings as $tab) {
       $set = tabArray($tab);
-      if ( ! $set['tabURL'] ) {
+      if ( ! $set['tabURL'] && ! $set['page'] ) {
         continue;
       }
       $o .= create_tab_settings($index,$set);
@@ -120,6 +125,7 @@ switch ($_POST['action']) {
     break;
   case 'show_tabs':
     $settings = json_decode($_POST['settings']);
+    
     $o = make_tabs($settings);
     $o .= enableAddTab();
     if ( ! $o ) { $o = " "; }

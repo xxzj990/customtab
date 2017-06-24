@@ -2,8 +2,8 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name      "customtab">
 <!ENTITY author    "Squid">
-<!ENTITY version   "2017.06.18">
-<!ENTITY md5       "58f6d4e020f89e79a71f39736269bd8e">
+<!ENTITY version   "2017.06.24">
+<!ENTITY md5       "c12069ddee82ff8732e3f870e8835b79">
 <!ENTITY launch    "Utilities/Customtab">
 <!ENTITY plugdir   "/usr/local/emhttp/plugins/&name;">
 <!ENTITY github    "Squidly271/customtab">
@@ -13,6 +13,9 @@
 <PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;">
 
 <CHANGES>
+###2017.06.24
+- Support Adding any unRaid page file as a custom tab
+
 ###2017.06.18
 - Support custom icons on 6.4 - Azure / Gray themes
 
@@ -52,8 +55,6 @@ echo "----------------------------------------------------"
 echo ""
 echo "Converting old configuration file"
 /usr/local/emhttp/plugins/customtab/scripts/convert.php
-echo "Creating custom tab"
-/usr/local/emhttp/plugins/customtab/scripts/createTab.php
 </INLINE>
 </FILE>
 
