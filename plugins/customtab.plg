@@ -1,7 +1,7 @@
 <?xml version='1.0' standalone='yes'?>
 <!DOCTYPE PLUGIN [
 <!ENTITY name      "customtab">
-<!ENTITY author    "Squid">
+<!ENTITY author    "Andrew Zawadzki">
 <!ENTITY version   "2017.06.24">
 <!ENTITY md5       "c12069ddee82ff8732e3f870e8835b79">
 <!ENTITY launch    "Utilities/Customtab">
