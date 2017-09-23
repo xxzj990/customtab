@@ -2,8 +2,8 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name      "customtab">
 <!ENTITY author    "Andrew Zawadzki">
-<!ENTITY version   "2017.06.24">
-<!ENTITY md5       "c12069ddee82ff8732e3f870e8835b79">
+<!ENTITY version   "2017.09.23">
+<!ENTITY md5       "29667b5b4727ab39f4cb02a3985e276c">
 <!ENTITY launch    "Utilities/Customtab">
 <!ENTITY plugdir   "/usr/local/emhttp/plugins/&name;">
 <!ENTITY github    "Squidly271/customtab">
@@ -13,6 +13,10 @@
 <PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;">
 
 <CHANGES>
+###2017.09.23
+- Fixed: Change focus to iframe when loaded (IE: Keyboard now works on URL tabs)
+* A change (any change) to the settings or a reboot will be required for this update to take effect
+
 ###2017.06.24
 - Support Adding any unRaid page file as a custom tab
 
