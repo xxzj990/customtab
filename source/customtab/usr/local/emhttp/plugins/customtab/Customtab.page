@@ -1,6 +1,6 @@
 Menu="Utilities"
 Title="Custom Tab"
-Icon="/images/customtab.png"
+Icon="customtab.png"
 ---
 <?PHP
 $plugin = 'customtab';

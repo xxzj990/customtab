@@ -2,8 +2,8 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name      "customtab">
 <!ENTITY author    "Andrew Zawadzki">
-<!ENTITY version   "2017.09.23">
-<!ENTITY md5       "29667b5b4727ab39f4cb02a3985e276c">
+<!ENTITY version   "2017.11.23">
+<!ENTITY md5       "b9ff813562019031dd83991537a472b1">
 <!ENTITY launch    "Utilities/Customtab">
 <!ENTITY plugdir   "/usr/local/emhttp/plugins/&name;">
 <!ENTITY github    "Squidly271/customtab">
@@ -13,6 +13,9 @@
 <PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;">
 
 <CHANGES>
+###2017.11.23
+- Fixed: Settings Icon on 6.4
+
 ###2017.09.23
 - Fixed: Change focus to iframe when loaded (IE: Keyboard now works on URL tabs)
 * A change (any change) to the settings or a reboot will be required for this update to take effect
