@@ -148,6 +148,7 @@ $(function() {
 });
 
 </script>
+<font size='2'><strong>NOTE: </strong></font>  If you access your server via HTTPS, then any custom tab added using a URL <b>must</b> also use HTTPS.<br><br>
 <span id='settings'></span>
 
 <input id='myapply' type="button" value="Apply" onclick='applyTab();'><input type="button" value="Done" onclick="done()">

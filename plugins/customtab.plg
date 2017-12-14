@@ -2,8 +2,8 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name      "customtab">
 <!ENTITY author    "Andrew Zawadzki">
-<!ENTITY version   "2017.11.23">
-<!ENTITY md5       "b9ff813562019031dd83991537a472b1">
+<!ENTITY version   "2017.12.13">
+<!ENTITY md5       "e1ea5afe251ff9239528d157c4b04181">
 <!ENTITY launch    "Utilities/Customtab">
 <!ENTITY plugdir   "/usr/local/emhttp/plugins/&name;">
 <!ENTITY github    "Squidly271/customtab">
@@ -13,6 +13,9 @@
 <PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;">
 
 <CHANGES>
+###2017.12.13
+- Added note warning if using HTTPS to access server that all URLs must also use HTTPS
+
 ###2017.11.23
 - Fixed: Settings Icon on 6.4
 
