@@ -38,6 +38,7 @@ foreach ($config as $cfg) {
     if ( ! file_exists($cfg['page']) ) {
       continue;
     }
+		$pageLocation = $cfg['position'] ?: "9$location";
     $name = ucfirst($cfg['name']);
     $fullname = $cfg['fullname'];
     $pageFile = $cfg['page'];
@@ -52,24 +53,24 @@ foreach ($config as $cfg) {
       $name = "A$name";
     }
     $fontawesome = $fontawesome ? $fontawesome : "f111";
-      $fullPageFile = explode("\n",trim(file_get_contents($pageFile)));
-      unset($pageINI);
-      unset($code);
-      $codeFlag = false;
-      foreach ($fullPageFile as $line) {
-        if ( (trim($line) == "---") || (trim($line) == "----") ) {
-          $codeFlag = true;
-        }
-        if ( $codeFlag ) {
-          $code .= "$line\n";
-        } else {
-          $pageINI .= "$line\n";
-        }
+    $fullPageFile = explode("\n",trim(file_get_contents($pageFile)));
+    unset($pageINI);
+    unset($code);
+    $codeFlag = false;
+    foreach ($fullPageFile as $line) {
+      if ( (trim($line) == "---") || (trim($line) == "----") ) {
+        $codeFlag = true;
       }
-      $pageVars = parse_ini_string($pageINI);
-      
-      $pageVars['CustomTabSource'] = $page;
-      $pageVars['Menu'] = "Tasks:9$location";
+      if ( $codeFlag ) {
+        $code .= "$line\n";
+      } else {
+        $pageINI .= "$line\n";
+      }
+    }
+    $pageVars = parse_ini_string($pageINI);
+     
+    $pageVars['CustomTabSource'] = $page;
+    $pageVars['Menu'] = "Tasks:$pageLocation";
       
     $mainPage = create_ini_file($pageVars)."---\n";
      
@@ -79,7 +80,7 @@ foreach ($config as $cfg) {
     if ( $dupeTest ) {
       $mainFileName = "{$name}_";
     }
-    $mainPage = "Menu='Tasks:9$location'\nName='{$name}'\nType='xmenu'\nTabs='true'\nCode='$fontawesome'\n";
+    $mainPage = "Menu='Tasks:$pageLocation'\nName='{$name}'\nType='xmenu'\nTabs='true'\nCode='$fontawesome'\n";
     $page = "Menu='$mainFileName'\nTitle='$fullname'\n---\n$code";
     exec("mkdir -p /usr/local/emhttp/plugins/customtabtemp");
     file_put_contents("/usr/local/emhttp/plugins/customtabtemp/$mainFileName.page",$mainPage);
@@ -112,7 +113,7 @@ foreach ($config as $cfg) {
     if ( $dupeTest ) {
       $name = "{$name}_";
     }
-    $mainPage = "Menu='Tasks:9$location'\nName='$name'\nType='xmenu'\nTabs='true'\nCode='$fontawesome'\n";
+    $mainPage = "Menu='Tasks:$pageLocation'\nName='$name'\nType='xmenu'\nTabs='true'\nCode='$fontawesome'\n";
     $page = "Menu='$name'\nTitle='$fullname'\n---\n<iframe src='$tabURL' height='$height' width='$width' onload='this.contentWindow.focus();'></iframe>\n";
     exec("mkdir -p /usr/local/emhttp/plugins/customtabtemp");
     file_put_contents("/usr/local/emhttp/plugins/customtabtemp/$name.page",$mainPage);

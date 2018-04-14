@@ -67,7 +67,8 @@ function getTabSetting(index) {
   var fontawesome = $("#fontawesome" + index).val();
   var selectPage = $("#selectPage"+index).val();
   var page = $("#page"+index).val();
-  var set = new Array(tabname,fullname,url,width,height,fontawesome,selectPage,page);
+	var position = $("#position"+index).val();
+  var set = new Array(tabname,fullname,url,width,height,fontawesome,selectPage,page,position);
   return set;
 }
 

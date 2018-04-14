@@ -2,8 +2,8 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name      "customtab">
 <!ENTITY author    "Andrew Zawadzki">
-<!ENTITY version   "2017.12.13">
-<!ENTITY md5       "e1ea5afe251ff9239528d157c4b04181">
+<!ENTITY version   "2018.04.14">
+<!ENTITY md5       "ece9579ab06b85ae7ee97beaaafb4c1e">
 <!ENTITY launch    "Utilities/Customtab">
 <!ENTITY plugdir   "/usr/local/emhttp/plugins/&name;">
 <!ENTITY github    "Squidly271/customtab">
@@ -13,6 +13,9 @@
 <PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;">
 
 <CHANGES>
+###2018.04.14
+- Added in ability to place tabs anywhere on the tab bar.
+
 ###2017.12.13
 - Added note warning if using HTTPS to access server that all URLs must also use HTTPS
 

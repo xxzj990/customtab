@@ -46,6 +46,8 @@ function create_tab_settings($index,$settings,$addFlag = false) {
   $o .= "<dl><input type='number' id='height$index' class='narrow setting url$index' $URLoptions value='{$settings['height']}' placeholder='500'></dl>";
   $o .= "<dt>Azure / Gray Icon: (See <a href='http://fontawesome.io/cheatsheet/' target='_blank'>HERE</a>)</dt>";
   $o .= "<dl><input type='text' id='fontawesome$index' class='narrow setting' value='{$settings['fontawesome']}' placeholder='f111'></dl>";
+	$o .= "<dt>Tab Position (see <a href='https://lime-technology.com/forums/topic/57109-plugin-custom-tab/'>HERE</a>)</dt>";
+	$o .= "<dl><input type='number' id='position$index' class='narrow setting' value='{$settings['position']}' placeholder='Automatic'></dl>";
   $o .= "</dd>";
   $o .= "<hr>";
   $o .= "<script>$('#page$index').val('{$settings['page']}');</script>";
@@ -74,6 +76,7 @@ function tabArray($tab) {
   $set['fontawesome'] = $tab[5];
   $set['selectPage'] = $tab[6];
   $set['page'] = $tab[7];
+	$set['position'] = $tab[8];
   
   return $set;
 }
