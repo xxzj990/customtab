@@ -125,12 +125,22 @@ function checkURL() {
 
 function enablePage(index) {
   var pageEnable = $("#selectPage"+index).val();
-  if ( pageEnable == "page" ) {
-    $(".url"+index).prop("disabled",true);
-    $(".page"+index).prop("disabled",false);
-  } else {
-    $(".url"+index).prop("disabled",false);
-    $(".page"+index).prop("disabled",true);
+	switch (pageEnable) {
+		case "page":
+		  $(".url"+index).prop("disabled",true);
+			$(".page"+index).prop("disabled",false);
+			break;
+		case "url":
+			$(".url"+index).prop("disabled",false);
+			$(".page"+index).prop("disabled",true);
+			$(".bookmark"+index).prop("disabled",false);
+			break;
+		case "bookmark":
+			$(".url"+index).prop("disabled",false);
+			$(".page"+index).prop("disabled",true);
+			$(".bookmark"+index).prop("disabled",true);
+			break;
+	
   }
 }
   

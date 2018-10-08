@@ -2,8 +2,8 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name      "customtab">
 <!ENTITY author    "Andrew Zawadzki">
-<!ENTITY version   "2018.04.14">
-<!ENTITY md5       "ece9579ab06b85ae7ee97beaaafb4c1e">
+<!ENTITY version   "2018.10.08">
+<!ENTITY md5       "45dd4bafbafae066029a319dd1ddabf6">
 <!ENTITY launch    "Utilities/Customtab">
 <!ENTITY plugdir   "/usr/local/emhttp/plugins/&name;">
 <!ENTITY github    "Squidly271/customtab">
@@ -13,6 +13,9 @@
 <PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;">
 
 <CHANGES>
+###2018.10.08
+- Add ability to open a url in same tab instead of frame (ie: bookmark)
+
 ###2018.04.14
 - Added in ability to place tabs anywhere on the tab bar.
 

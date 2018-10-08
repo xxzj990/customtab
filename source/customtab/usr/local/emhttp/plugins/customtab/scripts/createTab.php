@@ -87,7 +87,7 @@ foreach ($config as $cfg) {
     file_put_contents("/usr/local/emhttp/plugins/customtabtemp/$name".mt_rand().".page",$page);
     $index++;
     $location++;
-  } else {
+  } elseif ($cfg['selectPage'] == 'url') {
     $name = ucfirst($cfg['name']);
     $fullname = $cfg['fullname'];
     $tabURL = $cfg['tabURL'];
@@ -120,7 +120,39 @@ foreach ($config as $cfg) {
     file_put_contents("/usr/local/emhttp/plugins/customtabtemp/$name".mt_rand().".page",$page);
     $index++;
     $location++;
+  } elseif ($cfg['selectPage'] == 'bookmark') {
+		$name = ucfirst($cfg['name']);
+    $fullname = $cfg['fullname'];
+    $tabURL = $cfg['tabURL'];
+    $width = $cfg['width'];
+    $height = $cfg['height'];
+    $fontawesome = $cfg['fontawesome'];
+    if ( ! $name ) {
+      $name = "Custom$index";
+    }
+    $name = str_replace("'","",$name);
+    $name = str_replace('"',"",$name);
+    $name = str_replace(" ","",$name);
+    if (! preg_match('/^[a-z]/i', $name)) {
+      $name = "A$name";
+    }
+    $width = intval($width);
+    $height = intval($height);
+
+    $width = $width ? $width : "1280";
+    $height = $height ? $height : "500";
+    $fontawesome = $fontawesome ? $fontawesome : "f111";
+    $dupeTest = exec("find /usr/local/emhttp/plugins -name '$name.page'");
+    if ( $dupeTest ) {
+      $name = "{$name}_";
+    }
+    $mainPage = "Menu='Tasks:$pageLocation'\nName='$name'\nType='xmenu'\nTabs='true'\nCode='$fontawesome'\n";
+    $page = "Menu='$name'\nTitle='$fullname'\n---\n<script>window.location = '$tabURL';</script>";
+    exec("mkdir -p /usr/local/emhttp/plugins/customtabtemp");
+    file_put_contents("/usr/local/emhttp/plugins/customtabtemp/$name.page",$mainPage);
+    file_put_contents("/usr/local/emhttp/plugins/customtabtemp/$name".mt_rand().".page",$page);
+    $index++;
+    $location++;		
   }
-  
 }
 ?>

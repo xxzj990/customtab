@@ -17,13 +17,29 @@ function create_tab_settings($index,$settings,$addFlag = false) {
   $o .= "<dd>";
   $o .= "<dt>Custom URL or Built-In Page:</dt>";
   $o .= "<dl><select id='selectPage$index' class='narrow setting' onchange='enablePage(&quot;$index&quot;)';>";
-  if ( $settings['selectPage'] == "page" ) {
+/*   if ( $settings['selectPage'] == "page" ) {
     $selectPage = 'selected'; $URLoptions = "disabled";
   } else {
     $selectURL = 'selected'; $pageoptions = "disabled";
-  }
+  } */
+	switch ($settings['selectPage']) {
+		case 'page':
+			$selectPage = 'selected';
+			$URLoptions = 'disabled';
+			break;
+		case 'url': 
+			$selectURL = 'selected';
+			$pageoptions = 'disabled';
+			break;
+		case 'bookmark':
+			$selectBookmark = 'selected';
+			$pageoptions = 'disabled';
+			$bookmarkoptions = 'disabled';
+			break;
+	}
   $o .= "<option value='url' $selectURL>URL</option>";
   $o .= "<option value='page' $selectPage>Built-In Page</option>";
+	$o .= "<option value='bookmark' $selectBookmark>URL (Open Same Tab)</option>";
   $o .= "<select>";
   $o .= "</dl>";
   $o .= "<dt>Tab Name:</dt>";
@@ -41,9 +57,9 @@ function create_tab_settings($index,$settings,$addFlag = false) {
   }
   $o .= "</select></dl>";  
   $o .= "<dt>Width:</dt>";
-  $o .= "<dl><input type='number' id='width$index' class='narrow setting url$index' $URLoptions value='{$settings['width']}' placeholder='1280'></dl>";
+  $o .= "<dl><input type='number' id='width$index' class='narrow setting url$index bookmark$index' $URLoptions $bookmarkoptions value='{$settings['width']}' placeholder='1280'></dl>";
   $o .= "<dt>Height:</dt>";
-  $o .= "<dl><input type='number' id='height$index' class='narrow setting url$index' $URLoptions value='{$settings['height']}' placeholder='500'></dl>";
+  $o .= "<dl><input type='number' id='height$index' class='narrow setting url$index bookmark$index' $URLoptions $bookmarkoptions value='{$settings['height']}' placeholder='500'></dl>";
   $o .= "<dt>Azure / Gray Icon: (See <a href='http://fontawesome.io/cheatsheet/' target='_blank'>HERE</a>)</dt>";
   $o .= "<dl><input type='text' id='fontawesome$index' class='narrow setting' value='{$settings['fontawesome']}' placeholder='f111'></dl>";
 	$o .= "<dt>Tab Position (see <a href='https://lime-technology.com/forums/topic/57109-plugin-custom-tab/'>HERE</a>)</dt>";
