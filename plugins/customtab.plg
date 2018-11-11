@@ -2,8 +2,8 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name      "customtab">
 <!ENTITY author    "Andrew Zawadzki">
-<!ENTITY version   "2018.10.19">
-<!ENTITY md5       "da337a206b2bf603d63c6ee88ef3da1c">
+<!ENTITY version   "2018.11.11">
+<!ENTITY md5       "e3cc1833c236f65dca45992407cfb710">
 <!ENTITY launch    "Utilities/Customtab">
 <!ENTITY plugdir   "/usr/local/emhttp/plugins/&name;">
 <!ENTITY github    "Squidly271/customtab">
@@ -13,6 +13,9 @@
 <PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;">
 
 <CHANGES>
+###2018.11.11
+- Fixed: Position wouldn't work on URL tabs
+
 ###2018.10.19
 - Fix broken pipe
 

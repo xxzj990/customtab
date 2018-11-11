@@ -38,11 +38,11 @@ foreach ($config as $cfg) {
     if ( ! file_exists($cfg['page']) ) {
       continue;
     }
-		$pageLocation = $cfg['position'] ?: "9$location";
     $name = ucfirst($cfg['name']);
     $fullname = $cfg['fullname'];
     $pageFile = $cfg['page'];
     $fontawesome = $cfg['fontawesome'];
+	$pageLocation = $cfg['position'] ?: "9$location";
     if ( ! $name ) {
       $name = "Custom$index";
     }
@@ -94,6 +94,7 @@ foreach ($config as $cfg) {
     $width = $cfg['width'];
     $height = $cfg['height'];
     $fontawesome = $cfg['fontawesome'];
+	$pageLocation = $cfg['position'] ?: "9$location";
     if ( ! $name ) {
       $name = "Custom$index";
     }
@@ -121,6 +122,7 @@ foreach ($config as $cfg) {
     $index++;
     $location++;
   } elseif ($cfg['selectPage'] == 'bookmark') {
+	  $pageLocation = $cfg['position'] ?: "9$location";
 		$name = ucfirst($cfg['name']);
     $fullname = $cfg['fullname'];
     $tabURL = $cfg['tabURL'];
