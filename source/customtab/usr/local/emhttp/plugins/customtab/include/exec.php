@@ -36,10 +36,15 @@ function create_tab_settings($index,$settings,$addFlag = false) {
 			$pageoptions = 'disabled';
 			$bookmarkoptions = 'disabled';
 			break;
+		case 'tab':
+			$selectTab = 'selected';
+			$pageoptions = 'disabled';
+			$bookmarkoptions = 'disabled';
 	}
   $o .= "<option value='url' $selectURL>URL</option>";
   $o .= "<option value='page' $selectPage>Built-In Page</option>";
 	$o .= "<option value='bookmark' $selectBookmark>URL (Open Same Tab)</option>";
+	$o .= "<option value='tab' $selectTab>URL (Open New Tab) * popups MUST be enabled</option>";
   $o .= "<select>";
   $o .= "</dl>";
   $o .= "<dt>Tab Name:</dt>";

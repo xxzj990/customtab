@@ -121,7 +121,7 @@ foreach ($config as $cfg) {
     file_put_contents("/usr/local/emhttp/plugins/customtabtemp/$name".mt_rand().".page",$page);
     $index++;
     $location++;
-  } elseif ($cfg['selectPage'] == 'bookmark') {
+  } elseif ($cfg['selectPage'] == 'bookmark' || $cfg['selectPage'] == 'tab') {
 	  $pageLocation = $cfg['position'] ?: "9$location";
 		$name = ucfirst($cfg['name']);
     $fullname = $cfg['fullname'];
@@ -149,7 +149,11 @@ foreach ($config as $cfg) {
       $name = "{$name}_";
     }
     $mainPage = "Menu='Tasks:$pageLocation'\nName='$name'\nType='xmenu'\nTabs='true'\nCode='$fontawesome'\n";
-    $page = "Menu='$name'\nTitle='$fullname'\n---\n<script>window.location = '$tabURL';</script>";
+		if ($cfg['selectPage'] == 'bookmark') {
+			$page = "Menu='$name'\nTitle='$fullname'\n---\n<script>window.location = '$tabURL';</script>";
+		} else {
+			$page = "Menu='$name'\nTitle='$fullname'\n---\n<script>window.open('$tabURL','_blank');history.back();</script>";
+		}
     exec("mkdir -p /usr/local/emhttp/plugins/customtabtemp");
     file_put_contents("/usr/local/emhttp/plugins/customtabtemp/$name.page",$mainPage);
     file_put_contents("/usr/local/emhttp/plugins/customtabtemp/$name".mt_rand().".page",$page);

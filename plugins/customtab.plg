@@ -2,8 +2,8 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name      "customtab">
 <!ENTITY author    "Andrew Zawadzki">
-<!ENTITY version   "2018.11.11">
-<!ENTITY md5       "e3cc1833c236f65dca45992407cfb710">
+<!ENTITY version   "2018.12.09">
+<!ENTITY md5       "2f3999ab4193b09479aef03c4eb93fed">
 <!ENTITY launch    "Utilities/Customtab">
 <!ENTITY plugdir   "/usr/local/emhttp/plugins/&name;">
 <!ENTITY github    "Squidly271/customtab">
@@ -13,6 +13,9 @@
 <PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;">
 
 <CHANGES>
+###2018.12.09
+- Add in ability to open URL in new tab
+
 ###2018.11.11
 - Fixed: Position wouldn't work on URL tabs
 
