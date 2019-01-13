@@ -2,17 +2,20 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name      "customtab">
 <!ENTITY author    "Andrew Zawadzki">
-<!ENTITY version   "2018.12.09">
-<!ENTITY md5       "2f3999ab4193b09479aef03c4eb93fed">
+<!ENTITY version   "2019.01.13">
+<!ENTITY md5       "5f3848a3e477fad57809af0429123692">
 <!ENTITY launch    "Utilities/Customtab">
 <!ENTITY plugdir   "/usr/local/emhttp/plugins/&name;">
 <!ENTITY github    "Squidly271/customtab">
 <!ENTITY pluginURL "https://raw.githubusercontent.com/&github;/master/plugins/&name;.plg">
 ]>
 
-<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;">
+<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" icon="edit">
 
 <CHANGES>
+###2019.01.13
+- Adjust icon
+
 ###2018.12.09
 - Add in ability to open URL in new tab
 
