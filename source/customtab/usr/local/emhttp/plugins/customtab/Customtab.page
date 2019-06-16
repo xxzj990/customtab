@@ -145,6 +145,9 @@ function enablePage(index) {
 }
   
 $(function() {
+	if ( typeof caPluginUpdateCheck === "function" ) {
+		caPluginUpdateCheck("customtab.plg",{name:"Custom Tab"});
+	}
   $.post(URL,{action:'get_tabs_init'},function(data) {
     if (data) {
       $("#settings").html(data);
@@ -160,6 +163,7 @@ $(function() {
 
 </script>
 <font size='2'><strong>NOTE: </strong></font>  If you access your server via HTTPS, then any custom tab added using a URL <b>must</b> also use HTTPS.<br><br>
+<i class='fa fa-warning'></i>&nbsp;Also, if you add a plugin to the custom tab AND that plugin gets updated, then the custom tab will not necessarily reflect the updated version.  You will need to either reboot your server or make a change (any change) to a setting in this plugin and then revert the change for the custom tab to reflect the update<br><br>
 <span id='settings'></span>
 
 <input id='myapply' type="button" value="Apply" onclick='applyTab();'><input type="button" value="Done" onclick="done()">
