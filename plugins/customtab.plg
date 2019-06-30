@@ -2,8 +2,8 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name      "customtab">
 <!ENTITY author    "Andrew Zawadzki">
-<!ENTITY version   "2019.06.16">
-<!ENTITY md5       "0314f7bcbec0b0fa95b403b29d13c5e0">
+<!ENTITY version   "2019.06.30">
+<!ENTITY md5       "7b8c0d59bc8fe851da11994878801096">
 <!ENTITY launch    "Utilities/Customtab">
 <!ENTITY plugdir   "/usr/local/emhttp/plugins/&name;">
 <!ENTITY github    "Squidly271/customtab">
@@ -13,6 +13,10 @@
 <PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" icon="edit">
 
 <CHANGES>
+###2019.06.30
+- Display alert if a custom tab set to URL, Blank tab is clicked, but pop ups are disabled on browser.
+* A change (any change) to the settings or a reboot will be required for this update to take effect
+
 ###2019.06.16
 - Add note regarding adding updates to a plugin with a custom tab
 - Utilize CA's update API

@@ -152,7 +152,7 @@ foreach ($config as $cfg) {
 		if ($cfg['selectPage'] == 'bookmark') {
 			$page = "Menu='$name'\nTitle='$fullname'\n---\n<script>window.location = '$tabURL';</script>";
 		} else {
-			$page = "Menu='$name'\nTitle='$fullname'\n---\n<script>window.open('$tabURL','_blank');history.back();</script>";
+			$page = "Menu='$name'\nTitle='$fullname'\n---\n<script>var newWin = window.open('$tabURL','_blank');if (!newWin || newWin.closed || typeof newWin.closed=='undefined'){alert('Pop Up Blocked.  You must allow popups for this feature of Custom Tab to work');}history.back();</script>";
 		}
     exec("mkdir -p /usr/local/emhttp/plugins/customtabtemp");
     file_put_contents("/usr/local/emhttp/plugins/customtabtemp/$name.page",$mainPage);
