@@ -2,8 +2,8 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name      "customtab">
 <!ENTITY author    "Andrew Zawadzki">
-<!ENTITY version   "2019.11.10">
-<!ENTITY md5       "b7436a97c4b765164080da15173e60f7">
+<!ENTITY version   "2019.11.10a">
+<!ENTITY md5       "a0fb2fad0f76e2660b1966ed9c66cd49">
 <!ENTITY launch    "Utilities/Customtab">
 <!ENTITY plugdir   "/usr/local/emhttp/plugins/&name;">
 <!ENTITY github    "Squidly271/customtab">

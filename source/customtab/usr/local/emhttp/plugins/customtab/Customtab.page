@@ -5,6 +5,7 @@ Icon="edit"
 <?PHP
 $plugin = 'customtab';
 $cfg = parse_plugin_cfg($plugin);
+?>
 <script>
 var URL = "/plugins/customtab/include/exec.php";
 
