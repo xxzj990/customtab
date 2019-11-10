@@ -2,8 +2,8 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name      "customtab">
 <!ENTITY author    "Andrew Zawadzki">
-<!ENTITY version   "2019.06.30">
-<!ENTITY md5       "7b8c0d59bc8fe851da11994878801096">
+<!ENTITY version   "2019.11.10">
+<!ENTITY md5       "b7436a97c4b765164080da15173e60f7">
 <!ENTITY launch    "Utilities/Customtab">
 <!ENTITY plugdir   "/usr/local/emhttp/plugins/&name;">
 <!ENTITY github    "Squidly271/customtab">
@@ -13,6 +13,9 @@
 <PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" icon="edit">
 
 <CHANGES>
+###2019.11.10
+- Make built-in page dropdown selection readable
+
 ###2019.06.30
 - Display alert if a custom tab set to URL, Blank tab is clicked, but pop ups are disabled on browser.
 * A change (any change) to the settings or a reboot will be required for this update to take effect

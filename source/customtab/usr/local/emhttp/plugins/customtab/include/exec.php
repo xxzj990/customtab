@@ -57,8 +57,11 @@ function create_tab_settings($index,$settings,$addFlag = false) {
   $o .= "<dl>";
   $o .= "<select id='page$index' class='setting page$index' $pageoptions>";
   $o .= "<option value=''>Select a page file</option>";
+	usort($pageFiles,"mysort");
   foreach ($pageFiles as $page) {
-    $o .= "<option value='{$page['CustomTabSource']}'>{$page['Title']} {$page['CustomTabSource']}</option>";
+		if ( ! trim($page['Title']) ) continue;
+		if ( strpos($page['Title'],"$") !== false) continue;
+    $o .= "<option value='{$page['CustomTabSource']}'><strong>{$page['Title']}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(".str_replace("/usr/local/emhttp/plugins/","",$page['CustomTabSource']).")</option>";
   }
   $o .= "</select></dl>";  
   $o .= "<dt>Width:</dt>";
@@ -75,6 +78,10 @@ function create_tab_settings($index,$settings,$addFlag = false) {
 
   
   return $o;
+}
+
+function mySort($a,$b) {
+	return strcmp($a['Title'],$b['Title']);
 }
 
 function make_tabs($settings,$flag = false) {

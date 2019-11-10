@@ -5,21 +5,6 @@ Icon="edit"
 <?PHP
 $plugin = 'customtab';
 $cfg = parse_plugin_cfg($plugin);
-
-$Credits = "
-    <center><table align:'center'>
-      <tr>
-        <td><img src='https://github.com/Squidly271/plugin-repository/raw/master/Chode_300.gif' width='50px';height='48px'></td>
-        <td><strong>Squid</strong></td>
-        <td>Main Development</td>
-      </tr>
-    </table></center>
-    <br>
-    <center><a href='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7M7CBCVU732XG' target='_blank'><img src='https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif'></a></center>
-    <br><center><a href='https://forums.lime-technology.com/topic/57109-plugin-custom-tab/' target='_blank'>Plugin Support Thread</a></center>
-  ";
-  $Credits = str_replace("\n","",$Credits);
-?>
 <script>
 var URL = "/plugins/customtab/include/exec.php";
 
@@ -36,27 +21,6 @@ function applyTab() {
   });
 }
 
-function showCredits() {
-  myAlert("Custom Tab","<?=$Credits?>","/plugins/customtab/images/customlarge.png","96x96", true, false, true);
-}
-
-function myAlert(description,textdescription,textimage,imagesize, outsideClick, showCancel, showConfirm, alertType) {
-  if ( !outsideClick ) outsideClick = false;
-  if ( !showCancel )   showCancel = false;
-  if ( !showConfirm )  showConfirm = false;
-  if ( imagesize == "" ) { imagesize = "80x80"; }
-  swal({
-    title: description,
-    text: textdescription,
-    imageUrl: textimage,
-    imageSize: imagesize,
-    allowOutsideClick: outsideClick,
-    showConfirmButton: showConfirm,
-    showCancelButton: showCancel,
-    type: alertType,
-    html: true
-  });
-}
 
 function getTabSetting(index) {
   var tabname = $("#customtabname" + index).val();
@@ -168,6 +132,6 @@ $(function() {
 
 <input id='myapply' type="button" value="Apply" onclick='applyTab();'><input type="button" value="Done" onclick="done()">
 </form>
-<a class='ca_credits' style='float:right;cursor:pointer' onclick='showCredits();'>Credits</a>
+<a style='float:right;' href='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7M7CBCVU732XG' target='_blank'><img src='https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif'></a>
 <span id='debug'></span>
 <input type='button' value='Add Another Tab' id='newtab' onclick='addTab();'>
