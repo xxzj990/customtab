@@ -7,7 +7,7 @@ $plugin = 'customtab';
 $cfg = parse_plugin_cfg($plugin);
 ?>
 <script>
-var URL = "/plugins/customtab/include/exec.php";
+var caURL = "/plugins/customtab/include/exec.php";
 
 function applyTab() {
   var settings = new Array();
@@ -15,7 +15,7 @@ function applyTab() {
     var set = getTabSetting(index);
     settings.push(set);
   }
-  $.post(URL,{action:'apply',settings:JSON.stringify(settings)},function(data) {
+  $.post(caURL,{action:'apply',settings:JSON.stringify(settings)},function(data) {
     if ( data ) {
       location.reload();
     }
@@ -61,7 +61,7 @@ function deleteTab(del) {
     
 
 function showTabs(action,settings) {
-  $.post(URL,{action:action,settings:JSON.stringify(settings)},function(data) {
+  $.post(caURL,{action:action,settings:JSON.stringify(settings)},function(data) {
     if (data) {
       $("#settings").html(data);
       $(".setting").change(function() {
@@ -113,7 +113,7 @@ $(function() {
 	if ( typeof caPluginUpdateCheck === "function" ) {
 		caPluginUpdateCheck("customtab.plg",{name:"Custom Tab"});
 	}
-  $.post(URL,{action:'get_tabs_init'},function(data) {
+  $.post(caURL,{action:'get_tabs_init'},function(data) {
     if (data) {
       $("#settings").html(data);
       $(".setting").change(function() {
